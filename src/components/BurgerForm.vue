@@ -22,7 +22,7 @@
         </option>
       </select>
     </div>
-    <div class="input-container">
+    <div class="input-checkbox-container">
       <label for="">Opicionais: </label>
       <div
         v-for="opitional in foodData.opcionais"
@@ -51,9 +51,13 @@
 <script>
 import axios from "axios";
 import burger from "../assets/js/validate";
+import App from "../App.vue";
 
 export default {
   name: "BurgerForm",
+  extends: {
+    App,
+  },
   data() {
     return {
       name: "",
@@ -73,7 +77,7 @@ export default {
         let { data } = await axios.get("http://localhost:3000/ingredientes");
         this.foodData = data;
       } catch (error) {
-        alert("Erro na API\nConsulte o Desenvolvedor");
+        this.errorAPIAlert("Consulte o desenvolvedor:");
         console.error(error);
       }
     },
@@ -81,7 +85,6 @@ export default {
       e.preventDefault();
 
       if (this.validateData()) {
-
         const data = {
           nome: this.name.toUpperCase(),
           carne: this.beef,
@@ -91,7 +94,10 @@ export default {
         };
 
         try {
-          let { data:response } = await axios.post("http://localhost:3000/burgers", data);
+          let { data: response } = await axios.post(
+            "http://localhost:3000/burgers",
+            data
+          );
 
           this.clear();
 
@@ -104,9 +110,8 @@ export default {
             showConfirmButton: false,
             timer: 1500,
           });
-
         } catch (error) {
-          alert("Erro na API\nConsulte o Desenvolvedor");
+          this.errorAPIAlert("Consulte o desenvolvedor:");
           console.error(error);
         }
       } else {
@@ -131,11 +136,22 @@ export default {
       return true;
     },
     clear() {
-      this.name = ''
-      this.bread = ''
-      this.beef = ''
-      this.opitionals = []
-    }
+      this.name = "";
+      this.bread = "";
+      this.beef = "";
+      this.opitionals = [];
+    },
+    errorAPIAlert(msg) {
+      this.$swal({
+        icon: "error",
+        title: "Erro na API",
+        html:
+          msg +
+          '<br><a href="https://github.com/LucasMSF">github.com/LucasMSF</a>',
+        confirmButtonText: "Entendi",
+        confirmButtonColor: "#fa0505",
+      });
+    },
   },
   mounted() {
     this.getFoodData();
@@ -168,7 +184,7 @@ select {
   color: #1f1f1f;
 }
 
-.input-container label {
+  label {
   font-weight: bold;
   border-left: 5px solid #fcba03;
   padding: 5px 8px;
@@ -182,4 +198,11 @@ select {
   border-radius: 8px;
 }
 
+.checkbox-container {
+  margin: 8px;
+}
+
+.checkbox-container span {
+  margin-left: 8px;
+}
 </style>

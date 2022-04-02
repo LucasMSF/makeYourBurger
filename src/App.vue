@@ -46,4 +46,7 @@ body {
   text-align: center;
 }
 
+a {
+  transition: 0.2s;
+}
 </style>
