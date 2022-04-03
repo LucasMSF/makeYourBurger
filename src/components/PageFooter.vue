@@ -33,6 +33,7 @@ footer {
   color: #fcba03;
   border-top: 5px solid black;
   margin: auto;
+  /* position: fixed; */
   bottom: 0;
 }
 

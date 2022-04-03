@@ -87,16 +87,29 @@
   ],
   "burgers": [
     {
-      "nome": "BRUCE",
-      "carne": "Maminha",
+      "nome": "LUCAS",
+      "carne": "Picanha",
       "pao": "3 Queijos",
       "opicionais": [
+        "Bacon",
+        "Cheddar",
+        "Salame"
+      ],
+      "status": "Solicitado",
+      "id": 3
+    },
+    {
+      "nome": "JOAO",
+      "carne": "Picanha",
+      "pao": "3 Queijos",
+      "opicionais": [
+        "Salame",
         "Cebola roxa",
         "Pepino",
         "Picles"
       ],
-      "status": "Em produção",
-      "id": 2
+      "status": "Solicitado",
+      "id": 4
     }
   ]
 }

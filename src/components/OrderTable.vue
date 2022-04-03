@@ -73,6 +73,14 @@ export default {
     },
     async changeStatus(id, status) {
       await axios.patch("http://localhost:3000/burgers/" + id, { status });
+      this.$swal({
+        title: "Pedido Nº " + id  + " atualizado",
+        text: "Status: " + status,
+        icon: "info",
+        background: "#1f1f1f",
+        showConfirmButton: false,
+        timer: 1500
+      });
     },
     async cancelOrder(id) {
       let resp = await this.$swal({
@@ -92,7 +100,7 @@ export default {
         this.getOrders();
       } else {
         return false;
-      } 
+      }
     },
     teste() {
       alert("teste");
